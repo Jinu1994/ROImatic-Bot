@@ -1,0 +1,19 @@
+{
+  "name": "roimatic-bot-with-sdk4",
+  "version": "1.0.0",
+  "description": "ROIMatic bot using the new sdk v4",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jinu George",
+  "license": "ISC",
+  "dependencies": {
+    "botbuilder": "^4.0.6",
+    "botbuilder-dialogs": "^4.0.6",
+    "botframework-config": "^4.0.6",
+    "dotenv": "^6.0.0",
+    "moment": "^2.22.2",
+    "restify": "^7.2.1"
+  }
+}
