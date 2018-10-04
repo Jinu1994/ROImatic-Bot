@@ -59,7 +59,7 @@ class CampaignInfo extends ComponentDialog{
         step.values.duration = step.result;
         var date=moment();
         var startDate = date.add(1,'day');
-        var endDate = startDate.add(parseInt(step.result),'day');
+        var endDate = startDate.clone().add(parseInt(step.result),'day');
         var dateRange = startDate.format("MMM DD")+" - "+endDate.format("MMM DD")+" ("+step.result+" days)";
         await step.context.sendActivity(this.getNewProperty("Campaign Dates",dateRange));
         return await step.prompt('numberPrompt','how much would you like to spend per day?');
@@ -74,8 +74,13 @@ class CampaignInfo extends ComponentDialog{
             budget:budget
 
         }
-        await step.context.sendActivity(this.getNewProperty("Spend per day",budget));
+        
         var user = await this.userProfile.get(step.context,{});
+        await step.context.sendActivity(this.getNewProperty("Spend per day",budget));
+        await step.context.sendActivity(this.getNewProperty("Total Campaign Spend",budget*parseInt(step.values.duration)));
+        await step.context.sendActivity(this.getNewProperty("Receive calls on",user.phoneNumber));
+        await step.context.sendActivity(this.getNewProperty("Business Name",user.business.name));
+
         user.business.campaign = campaignInfo;
         await this.userProfile.set(step.context,user);
         return await step.endDialog();
