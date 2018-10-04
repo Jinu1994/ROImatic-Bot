@@ -5,10 +5,12 @@ const CAMPAIGN_INFO = 'getCampaign_info';
 const campaignObjectives = [{
     "value":'1',
     "action":{title:"More calls to you"},
+    "name":"Calls",
     "synonyms":["more calls","calls"]
 },{
     "value":'2',
     "action":{title:"More leads/form fills"},
+    "name":"Leads",
     "synonyms":["leads","forms"]
 }]
     
@@ -44,7 +46,7 @@ class CampaignInfo extends ComponentDialog{
 
     async durationPrompt(step){
             var objectiveId = step.result.value;
-            var objectiveName = campaignObjectives.find(objective=>objective.value===objectiveId).action.title;
+            var objectiveName = campaignObjectives.find(objective=>objective.value===objectiveId).name;
             step.values.objective = objectiveName;
 
             var user = await this.userProfile.get(step.context,{});
